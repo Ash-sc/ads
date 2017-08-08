@@ -29,7 +29,7 @@ const options = {
 
 router.get('/getAdsList', (req, res) => {
   fs.readdir(`${__dirname}/../public/adsFiles`, (err, files) => {
-    res.status(200).json({ result: 0, files, });
+    res.status(200).json({ result: 0, files: files || [], });
   });
 });
 

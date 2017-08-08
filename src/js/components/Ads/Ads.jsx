@@ -13,6 +13,11 @@ export default class Ads extends React.Component {
     this.props.actions.getAdsList();
   }
 
+  toggleChange(value) {
+    console.log(value, 222);
+    this.setState({ scriptInfo: value });
+  }
+
   addNewAds() {
     if (!this.state.scriptInfo) return;
     this.props.actions.newAds({ content: this.state.scriptInfo });
@@ -39,7 +44,7 @@ export default class Ads extends React.Component {
           <textarea
             className="text-area"
             value={this.state.scriptInfo}
-            onChange={e => this.setState({ scriptInfo: e.target.value })}
+            onChange={e => this.toggleChange(e.target.value)}
           > </textarea>
           <button className="btn" onClick={() => this.addNewAds()}>添加</button>
         </div>

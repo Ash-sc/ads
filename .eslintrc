@@ -32,7 +32,7 @@
     "react/no-string-refs": "off",
     "prefer-const":"off",
     "no-param-reassign":"off",
-    "no-nested-ternary":"off"
-//    "no-param-reassign": "off"
+    "no-nested-ternary":"off",
+    "linebreak-style": "off"
   }
 }
