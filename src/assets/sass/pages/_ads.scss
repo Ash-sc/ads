@@ -1,0 +1,61 @@
+.ads-body {
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+
+  .ads-script-section {
+    width: calc(50% - 45px);
+    display: inline-block;
+    margin: 30px 15px 0 30px;
+
+    .ads-script-list {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      list-style: none;
+      padding: 15px;
+      min-height: 100px;
+      max-height: 500px;
+      overflow: auto;
+
+      .script-item {
+        line-height: 40px;
+
+        &.empty {
+          text-align: center;
+          line-height: 100px;
+        }
+
+      }
+
+    }
+
+  }
+
+  .new-ads-section {
+    width: calc(50% - 45px);
+    display: inline-block;
+    margin: 30px 0 0 15px;
+    vertical-align: top;
+
+    .text-area {
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      height: 300px;
+      font-size: 15px;
+      padding: 15px;
+      box-sizing: border-box;
+      outline: none;
+    }
+
+    .btn {
+      width: 80px;
+      height: 35px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+    }
+  }
+
+}

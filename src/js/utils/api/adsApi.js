@@ -8,4 +8,8 @@ export default class adsApi {
   static getAdsList() {
     return Api.get('/getAdsList');
   }
+
+  static newAds(data) {
+    return Api.post('/newAds', data);
+  }
 }

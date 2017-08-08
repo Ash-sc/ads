@@ -5,7 +5,7 @@ import {
   GET_ADS_LIST_REQUEST,
   GET_ADS_LIST_SUCCESS,
   GET_ADS_LIST_FAILURE,
-} from 'constants/articleConstants';
+} from 'constants/sharedConstants';
 
 // Initial state
 export const initialState = {
@@ -20,7 +20,7 @@ export default function reducer(state = initialState, action) {
       return { ...state, ...{ status: action.status, adsList: [] } };
     }
     case GET_ADS_LIST_SUCCESS: {
-      return { ...state, ...{ status: action.status, adsList: action.data } };
+      return { ...state, ...{ status: action.status, adsList: action.data.files } };
     }
     default:
       return state;
