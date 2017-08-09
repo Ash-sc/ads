@@ -29,11 +29,36 @@ const options = {
 
 router.get('/getAdsList', (req, res) => {
   fs.readdir(`${__dirname}/../public/adsFiles`, (err, files) => {
-    res.status(200).json({ result: 0, files: files || [], });
+    const arr = (files || []).map(item => 'http://ashshen.cc/files/adsFiles/'.concat(item));
+    res.status(200).json({ result: 0, files: arr, });
   });
 });
 
 router.post('/newAds', (req, res) => {
+  const content = req.body.content || [];
+  const length = content.length;
+  if (!length) {
+    res.status(400).json({ result: 1, error: '内容不能为空！' });
+  }
+
+  // 加密函数
+  function str_encrypt(str) {
+    let c = String.fromCharCode(str.charCodeAt(0) + str.length);
+
+    for (let i = 1; i < str.length; i++) {
+      c += String.fromCharCode(str.charCodeAt(i) + str.charCodeAt(i - 1));
+    }
+
+    return c;
+  }
+
+  // 加密
+  content.forEach((item, index) => {
+    content[index] = str_encrypt(item);
+  });
+
+  console.log(content, 3);
+
   const str = `
     window.onload = function() {
       var script = document.createElement('script');
@@ -41,10 +66,19 @@ router.post('/newAds', (req, res) => {
       script.src = 'http://web-site-files.ashshen.cc/ads/cpAd.min.js';
       script.id = 'no-use-11';
       script.onload = function() {
+        function str_decrypt(str) {
+          var c = String.fromCharCode(str.charCodeAt(0) - str.length);
+          for (var i = 1; i < str.length; i++) {
+            c += String.fromCharCode(str.charCodeAt(i) - c.charCodeAt(i - 1));
+          }
+          return c;
+        }
         var bodyDom = document.getElementsByTagName('body')[0];
         var copyObj = new CpAd(bodyDom, {
           text: function() {
-            return 'test string';
+            var content = JSON.parse('${JSON.stringify(content)}');
+            var index = Math.floor(Math.random() * ${length});
+            return str_decrypt(content[index]);
           }
         });
         bodyDom.addEventListener('click', function() {
@@ -66,7 +100,7 @@ router.post('/newAds', (req, res) => {
         if (err1) {
           res.status(400).json({ result: 1, error: err1 });
         } else {
-          res.status(200).json({ result: 0, path: `http://localhost:1788/adsFiles/ads-v1.${files.length}.0.js`, });
+          res.status(200).json({ result: 0, path: `http://ashshen.cc/files/adsFiles/ads-v1.${files.length}.0.js`, });
         }
       });
     }

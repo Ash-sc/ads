@@ -2,60 +2,154 @@
   width: 100%;
   height: 100vh;
   overflow: auto;
+  color: #333;
+
+  .ads-header {
+    height: 200px;
+    width: 100%;
+    background: #27ae60;
+  }
+
+  .hide-new-section, .hide-list-section {
+    display: none;
+  }
+
+  .new-ads-section {
+    position: relative;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 1200px;
+    height: 365px;
+    margin-top: 100px;
+
+    .content-tips {
+      margin-top: 25px;
+      display: inline-block;
+    }
+
+    .new-ads-content {
+      width: 100%;
+      height: 300px;
+      border-radius: 4px;
+      border: 1px solid #e1e1e8;
+      padding: 15px;
+      font-size: 15px;
+      box-sizing: border-box;
+      outline: none;
+    }
+
+    .confirm-btn, .cancel-btn {
+      padding: 10px 25px;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+      background-color: #27ae60;
+      color: #fff;
+      float: right;
+      margin-top: 15px;
+    }
+
+    .cancel-btn {
+      margin-right: 30px;
+      background-color: #fff;
+      color: #555;
+      border: 1px solid #ddd;
+    }
+
+  }
 
   .ads-script-section {
-    width: calc(50% - 45px);
-    display: inline-block;
-    margin: 30px 15px 0 30px;
+    position: relative;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 1200px;
+    margin-top: 100px;
+
+    .new-ads {
+      position: absolute;
+      right: 15px;
+      top: -45px;
+      padding: 10px 15px;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+      background-color: #27ae60;
+      color: #fff;
+    }
 
     .ads-script-list {
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      list-style: none;
-      padding: 15px;
-      min-height: 100px;
-      max-height: 500px;
-      overflow: auto;
+      position: relative;
 
-      .script-item {
-        line-height: 40px;
+      .ads-script-item-body {
+        padding-left: 40px;
+        margin-bottom: 50px;
 
-        &.empty {
-          text-align: center;
-          line-height: 100px;
+        .list-group {
+          padding-left: 0;
+          margin: 0;
+          list-style: none;
+
+          .list-group-item {
+            background-color: #fff;
+            border: 1px solid #ecf0f1;
+            font-size: 1.1em;
+            padding: 30px 20px 30px 25px;
+            margin-bottom: -1px;
+
+            .clipboard {
+              position: relative;
+
+              .btn {
+                position: absolute;
+                top: -31px;
+                right: -21px;
+                z-index: 10;
+                display: block;
+                padding: 5px 8px;
+                font-size: 12px;
+                color: #767676;
+                cursor: pointer;
+                background-color: #fff;
+                border: 1px solid #e1e1e8;
+                border-radius: 0 4px 0 4px;
+
+                &.copy-script {
+                  right: 80px;
+                }
+
+              }
+
+            }
+
+            &.empty-list {
+              text-align: center;
+            }
+
+          }
+
         }
 
       }
 
     }
 
-  }
-
-  .new-ads-section {
-    width: calc(50% - 45px);
-    display: inline-block;
-    margin: 30px 0 0 15px;
-    vertical-align: top;
-
-    .text-area {
-      width: 100%;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      height: 300px;
-      font-size: 15px;
-      padding: 15px;
-      box-sizing: border-box;
-      outline: none;
+    .ads-script-list:before {
+      content: '';
+      position: absolute;
+      left: 16px;
+      width: 2px;
+      height: 100%;
+      background: #60db94;
     }
 
-    .btn {
-      width: 80px;
-      height: 35px;
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      outline: none;
-    }
   }
 
 }
