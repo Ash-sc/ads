@@ -9,8 +9,8 @@ const UglifyJS = require("uglify-js");
 
 const fs = require('fs');
 
-// const path = 'http://ashshen.cc/files/files/adsFiles/';
-const path = 'http://localhost:1788/adsFiles/';
+const path = 'http://ashshen.cc/files/files/adsFiles/';
+// const path = 'http://localhost:1788/adsFiles/';
 
 const opts = {
   logFilePath: `logs/ads-log-${moment().format('YYYY-MM-DD')}.log`,
