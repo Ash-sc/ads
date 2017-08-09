@@ -9,6 +9,8 @@ const UglifyJS = require("uglify-js");
 
 const fs = require('fs');
 
+const path = 'http://ashshen.cc/files/files/adsFiles/';
+
 const opts = {
   logFilePath: `logs/ads-log-${moment().format('YYYY-MM-DD')}.log`,
   timestampFormat:'YYYY-MM-DD HH:mm:ss'
@@ -29,7 +31,7 @@ const options = {
 
 router.get('/getAdsList', (req, res) => {
   fs.readdir(`${__dirname}/../public/adsFiles`, (err, files) => {
-    const arr = (files || []).map(item => 'http://ashshen.cc/files/adsFiles/'.concat(item));
+    const arr = (files || []).map(item => path.concat(item));
     res.status(200).json({ result: 0, files: arr, });
   });
 });
@@ -100,7 +102,7 @@ router.post('/newAds', (req, res) => {
         if (err1) {
           res.status(400).json({ result: 1, error: err1 });
         } else {
-          res.status(200).json({ result: 0, path: `http://ashshen.cc/files/adsFiles/ads-v1.${files.length}.0.js`, });
+          res.status(200).json({ result: 0, path: `${path}ads-v1.${files.length}.0.js`, });
         }
       });
     }
