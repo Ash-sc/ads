@@ -22,7 +22,7 @@
     margin-left: auto;
     width: 1200px;
     height: 365px;
-    margin-top: 100px;
+    margin-top: 80px;
 
     .content-tips {
       margin-top: 25px;
@@ -69,7 +69,12 @@
     margin-right: auto;
     margin-left: auto;
     width: 1200px;
-    margin-top: 100px;
+    margin-top: 80px;
+
+    .list-title {
+      position: relative;
+      top: -37px;
+    }
 
     .new-ads {
       position: absolute;
@@ -122,7 +127,12 @@
                 border-radius: 0 4px 0 4px;
 
                 &.copy-script {
-                  right: 80px;
+                  right: 65px;
+                }
+
+                &.download-script {
+                  right: 212px;
+                  text-decoration: none;
                 }
 
               }

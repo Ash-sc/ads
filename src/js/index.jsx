@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
 import 'assets/sass/styles.scss';
+import 'antd/dist/antd.css';
 import 'assets/favicon.ico';
 import 'index.html';
 
