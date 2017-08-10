@@ -10,7 +10,7 @@ const exec = require('child_process').exec;
 
 const fs = require('fs');
 
-const path = 'https://code.aliyun.com/ads/adsFiles/raw/master/';
+const path = 'http://code.taobao.org/svn/adsfile/trunk/';
 // const path = 'http://localhost:1788/adsFiles/';
 
 const opts = {
