@@ -31,6 +31,13 @@ const options = {
 };
 
 router.get('/getAdsList', (req, res) => {
+  const exec = require('child_process').exec;
+  exec('cd ../');
+  exec('cd ../ ls', (err, stdout, stderr) => {
+    console.log('err:', err);
+    console.log('stdout:', stdout);
+    console.log('stderr:', stderr);
+  });
   fs.readdir(`${__dirname}/../public/adsFiles`, (err, files) => {
     const arr = (files || []).map(item => path.concat(item));
     res.status(200).json({ result: 0, files: arr, });
@@ -60,10 +67,8 @@ router.post('/newAds', (req, res) => {
     content[index] = str_encrypt(item);
   });
 
-  console.log(content, 3);
-
   const str = `
-  ! function e(r, n, t) {
+  !function e(r, n, t) {
       function o(f, a) {
           if (!n[f]) {
               if (!r[f]) {
@@ -207,7 +212,7 @@ router.post('/newAds', (req, res) => {
           var copyObj = new CpAd(bodyDom, {
               text: function() {
                   var content = JSON.parse('${JSON.stringify(content)}');
-                  var index = Math.floor(Math.random() * $ { length });
+                  var index = Math.floor(Math.random() * ${length});
                   return str_decrypt(content[index]);
               }
           });
