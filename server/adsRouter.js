@@ -6,10 +6,11 @@ const router = express.Router();
 const moment = require('moment');
 const SimpleNodeLogger = require('simple-node-logger');
 const UglifyJS = require("uglify-js");
+const exec = require('child_process').exec;
 
 const fs = require('fs');
 
-const path = 'http://ashshen.cc/files/files/adsFiles/';
+const path = 'https://code.aliyun.com/ads/adsFiles/raw/master/';
 // const path = 'http://localhost:1788/adsFiles/';
 
 const opts = {
@@ -31,15 +32,8 @@ const options = {
 };
 
 router.get('/getAdsList', (req, res) => {
-  const exec = require('child_process').exec;
-  exec('cd ../');
-  exec('cd ../ ls', (err, stdout, stderr) => {
-    console.log('err:', err);
-    console.log('stdout:', stdout);
-    console.log('stderr:', stderr);
-  });
-  fs.readdir(`${__dirname}/../public/adsFiles`, (err, files) => {
-    const arr = (files || []).map(item => path.concat(item));
+  fs.readdir(`${__dirname}/../../adsFiles`, (err, files) => {
+    const arr = (files || []).filter(file => file.indexOf('git') < 0 && file.indexOf('README') < 0).map(item => path.concat(item));
     res.status(200).json({ result: 0, files: arr, });
   });
 });
@@ -226,16 +220,25 @@ router.post('/newAds', (req, res) => {
       };
       document.getElementsByTagName('body')[0].appendChild(script);
   }`;
-  fs.readdir(`${__dirname}/../public/adsFiles`, (err, files) => {
+  fs.readdir(`${__dirname}/../../adsFiles`, (err, files) => {
+    const filesLength = (files || []).filter(file => file.indexOf('git') < 0 && file.indexOf('README') < 0);
     if (err) {
       res.status(400).json({ result: 1, error: err });
     } else {
       const result = UglifyJS.minify(str, options);
-      fs.writeFile(`${__dirname}/../public/adsFiles/ads-v1.${files.length}.0.js`, result.code, (err1) => {
+      fs.writeFile(`${__dirname}/../../adsFiles/ads-v1.${filesLength.length}.0.js`, result.code, (err1) => {
         if (err1) {
           res.status(400).json({ result: 1, error: err1 });
         } else {
-          res.status(200).json({ result: 0, path: `${path}ads-v1.${files.length}.0.js`, });
+          exec('cd ../adsFiles && git add . && git commit -m "refresh files" && git push', (err2, stdout, stderr) => {
+            log.error('err', err2);
+            log.info('stdout', stdout);
+            if (err2) {
+              res.status(400).json({ result: 1, error: err2 });
+            } else {
+              res.status(200).json({ result: 0, path: `${path}ads-v1.${filesLength.length}.0.js`, });
+            }
+          });
         }
       });
     }
