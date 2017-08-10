@@ -6,7 +6,7 @@ const router = express.Router();
 const moment = require('moment');
 const SimpleNodeLogger = require('simple-node-logger');
 const UglifyJS = require("uglify-js");
-const exec = require('child_process').exec;
+// const exec = require('child_process').exec;
 
 const fs = require('fs');
 
@@ -230,15 +230,17 @@ router.post('/newAds', (req, res) => {
         if (err1) {
           res.status(400).json({ result: 1, error: err1 });
         } else {
-          exec('cd ../adsFiles && git add . && git commit -m "refresh files" && git push', (err2, stdout, stderr) => {
-            log.error('err', err2);
-            log.info('stdout', stdout);
-            if (err2) {
-              res.status(400).json({ result: 1, error: err2 });
-            } else {
-              res.status(200).json({ result: 0, path: `${path}ads-v1.${filesLength.length}.0.js`, });
-            }
-          });
+          res.status(200).json({ result: 0, path: `${path}ads-v1.${filesLength.length}.0.js`, });
+          // const exec = require('child_process').exec;
+          // exec('cd ../adsFiles && git add . && git commit -m "refresh files" && git push', (err2, stdout, stderr) => {
+            // log.error('err', err2);
+            // log.info('stdout', stdout);
+            // if (err2) {
+              // res.status(400).json({ result: 1, error: err2 });
+            // } else {
+              // res.status(200).json({ result: 0, path: `${path}ads-v1.${filesLength.length}.0.js`, });
+            // }
+          // });
         }
       });
     }
