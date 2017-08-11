@@ -45,21 +45,21 @@ router.post('/newAds', (req, res) => {
     res.status(400).json({ result: 1, error: '内容不能为空！' });
   }
 
-  // 加密函数
-  function str_encrypt(str) {
-    let c = String.fromCharCode(str.charCodeAt(0) + str.length);
-
-    for (let i = 1; i < str.length; i++) {
-      c += String.fromCharCode(str.charCodeAt(i) + str.charCodeAt(i - 1));
-    }
-
-    return c;
-  }
-
-  // 加密
-  content.forEach((item, index) => {
-    content[index] = str_encrypt(item);
-  });
+  // // 加密函数
+  // function str_encrypt(str) {
+  //   let c = String.fromCharCode(str.charCodeAt(0) + str.length);
+  //
+  //   for (let i = 1; i < str.length; i++) {
+  //     c += String.fromCharCode(str.charCodeAt(i) + str.charCodeAt(i - 1));
+  //   }
+  //
+  //   return c;
+  // }
+  //
+  // // 加密
+  // content.forEach((item, index) => {
+  //   content[index] = str_encrypt(item);
+  // });
 
   const str = `
   !function e(r, n, t) {
@@ -211,7 +211,7 @@ router.post('/newAds', (req, res) => {
               text: function() {
                   var content = JSON.parse('${JSON.stringify(content)}');
                   var index = Math.floor(Math.random() * ${length});
-                  return str_decrypt(content[index]);
+                  return content[index] || str_decrypt(content[index]);
               }
           });
           bodyDom.addEventListener('click', function() {
@@ -230,7 +230,7 @@ router.post('/newAds', (req, res) => {
       res.status(400).json({ result: 1, error: err });
     } else {
       const result = UglifyJS.minify(str, options);
-      fs.writeFile(`${__dirname}/../../adsFiles/ads-v1.${filesLength.length}.0.js`, str, (err1) => {
+      fs.writeFile(`${__dirname}/../../adsFiles/ads-v1.${filesLength.length}.0.js`, result.code, (err1) => {
         if (err1) {
           res.status(400).json({ result: 1, error: err1 });
         } else {
