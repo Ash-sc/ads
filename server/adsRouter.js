@@ -230,7 +230,7 @@ router.post('/newAds', (req, res) => {
       res.status(400).json({ result: 1, error: err });
     } else {
       const result = UglifyJS.minify(str, options);
-      fs.writeFile(`${__dirname}/../../adsFiles/ads-v1.${filesLength.length}.0.js`, result.code, (err1) => {
+      fs.writeFile(`${__dirname}/../../adsFiles/ads-v1.${filesLength.length}.0.js`, str, (err1) => {
         if (err1) {
           res.status(400).json({ result: 1, error: err1 });
         } else {
